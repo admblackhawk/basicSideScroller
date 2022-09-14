@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spr = playerSprite.GetComponent<SpriteRenderer>();
-        // anim = playerSprite.GetComponent<Animator>();
+        anim = playerSprite.GetComponent<Animator>();
         boundingBoxSizeX = GetComponent<CapsuleCollider2D>().size.x;
     }
 
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     {
         //Calling function inside of update, so it is executed every frame.
         Movement();
-        //characterAnimation();
+        characterAnimation();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -89,11 +89,11 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x + rayOrigion.x, transform.position.y + rayOrigion.y), Vector2.down, rayLength, rayCastLayers);
 
         //Flip the character based on direction of movement.
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetAxis("Horizontal") > 0) 
         {
             spr.flipX = false;
         }
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetAxis("Horizontal") < 0) 
         {
             spr.flipX = true;
         }
